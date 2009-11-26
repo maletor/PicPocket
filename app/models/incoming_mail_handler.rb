@@ -17,7 +17,7 @@ class IncomingMailHandler < ActionMailer::Base
     # type address.
     if (@user = User.find_by_email(email.from))
       mms.media.each do |key, value|
-        if key.include('image')
+        if key.include?('image')
           @photo = Photo.new(:uploaded_data => value, :title => value.subject.empty? ? "Untitled" : value.subject)
           @user.photos << @photo
         end
