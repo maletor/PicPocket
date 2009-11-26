@@ -15,19 +15,16 @@ class IncomingMailHandler < ActionMailer::Base
     # Remember to make UI option that users can opt out of registration 
     # and either not send emails or send them to a username+32523@picpocket.com
     # type address.
-    if (user = User.find_by_email(email.from))
+    ##
+    # Remember to get SpamAssasin
+    if (user = User.find_by_email(email.from) && email.has_attachments?)
       mms.media.each do |key, value|
         if key.include?('image')
           value.each do |file| 
-            photo = Photo.new(:uploaded_data => File.read(file), :title => email.subject.empty? ? "Untitled" : email.subject)
-            user.photos << photo
+            user.photos << Photo.create!(:uploaded_data => File.open(file), :title => email.subject.empty? ? "Untitled" : email.subject)
           end
         end
       end
-    else
-      ##
-      # Remember to get SpamAssasin
-      logger.info("No user found with email: #{email.from}") 
     end   
     
     mms.purge
