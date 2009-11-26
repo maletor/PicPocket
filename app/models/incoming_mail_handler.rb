@@ -20,9 +20,9 @@ class IncomingMailHandler < ActionMailer::Base
       
       if (user && email.has_attachments?)
         mms.process do |media_type, files|
-#          for file in files
-            user.photos.push Photo.create!(:uploaded_data => files.first, :title => "From mail") if media_type =~ /image/
-#          end
+          for file in files
+            user.photos.push Photo.create!(:uploaded_data => file.local_path, :title => "From mail") if media_type =~ /image/
+          end
         end
       end
       
