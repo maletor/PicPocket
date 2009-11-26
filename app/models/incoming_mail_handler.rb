@@ -1,3 +1,5 @@
+require 'mms2r'
+
 class IncomingMailHandler < ActionMailer::Base
 
   def receive(email)    
