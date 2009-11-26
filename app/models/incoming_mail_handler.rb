@@ -17,11 +17,11 @@ class IncomingMailHandler < ActionMailer::Base
     # type address.
     ##
     # Remember to get SpamAssasin
-    if (user = User.find_by_email(email.from) && email.has_attachments?)
+    if (@user = User.find_by_email(email.from) && email.has_attachments?)
       mms.media.each do |key, value|
         if key.include?('image')
           value.each do |file| 
-            user.photos << Photo.create!(:uploaded_data => mms.default_media, :title => email.subject.empty? ? "Untitled" : email.subject)
+            @user.photos.push Photo.create!(:uploaded_data => File.open(file), :title => email.subject.empty? ? "Untitled" : email.subject)
           end
         end
       end
