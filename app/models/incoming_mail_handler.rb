@@ -17,12 +17,22 @@ class IncomingMailHandler < ActionMailer::Base
       # and either not send emails or send them to a username+32523@picpocket.com
       # type addresss
       user = User.find_by_email(mms.from)
-      media = mms.default_media
-      
-      if user && media.content_type.include?('image')
-        user.photos << Photo.create(:uploaded_data => media)
-        
+
+      mms.media.each do |key, value|
+        if key.includes?('image')
+          for file in value
+            if user && media.content_type.include?('image')
+            
+              file.local_path = file.path
+              file.original_filename = File.basename(file.path)
+              file.size = File.size(file.path)
+              user.photos << Photo.create(:uploaded_data => file)
+              
+            end
+          end
+        end
       end
+      
       
     ensure
       
