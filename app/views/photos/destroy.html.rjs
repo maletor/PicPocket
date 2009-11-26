@@ -1,0 +1,6 @@
+page.hide "photo_#{@photos.id.to_s}"
+    page.remove "photos_#{@photos.id.to_s}"
+    page.assign 'multi_selector.max', @allowed
+    if @allowed < 5
+      page << "if ($('newfile_data').disabled) { $('newfile_data').disabled = false };"
+    end

@@ -1,0 +1,9 @@
+<% form_for(:user, 
+			:url => user_path(@user), 
+			:html => { :multipart => true }) do |f| %>
+        <%= error_messages_for 'user' %>
+        
+        <p>
+            <%= f.submit "Save Changes", :id => 'user_submit' %>
+        </p>
+    <% end -%>

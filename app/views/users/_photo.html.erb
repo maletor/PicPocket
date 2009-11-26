@@ -1,0 +1,2 @@
+<%= "<li id=\"photo_#{photo.id}\">#{photo.filename} %>
+    <%= link_to_remote "Remove", :url  => photo_path(:id => photo), :method => :delete, :html => { :title  => "Remove this photo" } %></li>
