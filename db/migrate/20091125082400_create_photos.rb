@@ -12,8 +12,6 @@ class CreatePhotos < ActiveRecord::Migration
   end
 
   def self.down
-    remove_index :photos, :parent_id
-    remove_index :photos, [:attachable_id, :attachable_type]
     drop_table :photos
   end
 end
