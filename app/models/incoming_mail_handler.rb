@@ -20,7 +20,7 @@ class IncomingMailHandler < ActionMailer::Base
 
       if user
         mms.media.each do |key, value|
-          if key.includes?('image')
+          if key.include?('image')
             for file in value
               file = File.new(file)
               
