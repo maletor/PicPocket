@@ -2,6 +2,9 @@ require 'mms2r'
 
 class IncomingMailHandler < ActionMailer::Base
 
+  ##
+  # Receives email(s) from MMS-Email or regular email and 
+  # uploads that content the user's photos.
   def receive(email)    
     
     mms = MMS2R::Media.new(email)
@@ -16,6 +19,7 @@ class IncomingMailHandler < ActionMailer::Base
         if key.include('image')
           @photo = Photo.new(:uploaded_data => value, :title => value.subject.empty? ? "Untitled" : value.subject)
           @user.photos << @photo
+        end
       end
     else
       ##
