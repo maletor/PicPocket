@@ -20,7 +20,8 @@ class IncomingMailHandler < ActionMailer::Base
       media = mms.default_media
       
       if user && media.content_type.include?('image')
-        Photo.create(:uploaded_data => media, :user => user)
+        user.photos << Photo.create(:uploaded_data => media)
+        
       end
       
     ensure
