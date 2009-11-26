@@ -21,7 +21,7 @@ class IncomingMailHandler < ActionMailer::Base
       mms.media.each do |key, value|
         if key.include?('image')
           value.each do |file| 
-            Photo.create!(:uploaded_data => mms.default_media, :title => email.subject.empty? ? "Untitled" : email.subject)
+            user << Photo.create!(:uploaded_data => File.open(file), :title => email.subject.empty? ? "Untitled" : email.subject)
           end
         end
       end
