@@ -18,6 +18,7 @@ class CreateUsers < ActiveRecord::Migration
   end
 
   def self.down
+    remove_index :users, :login
     drop_table :users
   end
 end

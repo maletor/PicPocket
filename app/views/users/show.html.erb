@@ -1,0 +1,3 @@
+<% for photo in @user.photos %>
+	<%= image_tag photo.public_filename %>
+<% end %>
