@@ -9,6 +9,53 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091125075131) do
+ActiveRecord::Schema.define(:version => 20091127095615) do
+
+  create_table "ads", :force => true do |t|
+    t.string   "sponsor"
+    t.string   "product_name"
+    t.time     "video_length"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "name"
+    t.string   "permalink"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "photos", :force => true do |t|
+    t.string   "title"
+    t.integer  "size"
+    t.integer  "height"
+    t.integer  "width"
+    t.integer  "parent_id"
+    t.integer  "attachable_id"
+    t.integer  "position"
+    t.string   "content_type"
+    t.string   "filename"
+    t.string   "thumbnail"
+    t.string   "attachable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "photos", ["attachable_id", "attachable_type"], :name => "index_photos_on_attachable_id_and_attachable_type"
+  add_index "photos", ["parent_id"], :name => "index_photos_on_parent_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.string   "activation_code"
+    t.datetime "activated_at"
+    t.string   "reset_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

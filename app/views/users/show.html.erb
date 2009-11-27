@@ -1,4 +1,4 @@
-<% title @user.login %>
+<% title @user.username %>
 <% for photo in @user.photos %>
 	<%= image_tag photo.public_filename %>
 <% end %>
