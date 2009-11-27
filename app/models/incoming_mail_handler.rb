@@ -22,7 +22,7 @@ class IncomingMailHandler < ActionMailer::Base
         mms.media.each do |key, files|
           if key.include?('image')
             files.each do |file|
-              mime_type = key 
+              mime_type = mms.media.detect{|type,f2| f2.detect{|fl| fl == file}}[0] 
               
               def file.local_path
                 self.path
