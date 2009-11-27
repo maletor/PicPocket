@@ -469,3 +469,142 @@ Migrating to CreatePhotos (20091125082400)
   [4;35;1mPhoto Create (40.4ms)[0m   [0mINSERT INTO "photos" ("position", "size", "created_at", "content_type", "thumbnail", "updated_at", "height", "parent_id", "filename", "attachable_type", "attachable_id", "width") VALUES(NULL, 15995, '2009-11-26 17:48:29', 'image/png', NULL, '2009-11-26 17:48:29', 128, NULL, '45.png', NULL, NULL, 128)[0m
   [4;36;1mUser Load (0.9ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."email" IN ('eberner@gmail.com')) LIMIT 1[0m
   [4;36;1mUser Load (1.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+
+
+Processing UsersController#index (for ::1 at 2009-11-26 23:23:49) [GET]
+Rendering users/index
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.each) on line #1 of app/views/users/index.html.erb:
+1: <% for user in @users %>
+2: 	<%= h user.username %>
+3: <% end %>
+
+    app/views/users/index.html.erb:1
+    /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (138.6ms)
+Rendered rescues/_request_and_response (3.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing UsersController#index (for ::1 at 2009-11-26 23:24:18) [GET]
+
+NameError (uninitialized constant UsersController::Users):
+  app/controllers/users_controller.rb:6:in `index'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (70.0ms)
+Rendered rescues/_request_and_response (1.6ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing UsersController#index (for ::1 at 2009-11-26 23:24:28) [GET]
+  [4;36;1mSQL (1.1ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+NoMethodError (undefined method `find_all' for #<Class:0x10418a0d8>):
+  app/controllers/users_controller.rb:6:in `index'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (81.3ms)
+Rendered rescues/_request_and_response (0.5ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing UsersController#index (for ::1 at 2009-11-26 23:24:35) [GET]
+  [4;35;1mUser Load (52.4ms)[0m   [0mSELECT * FROM "users" [0m
+Rendering users/index
+
+ActionView::TemplateError (undefined method `username' for #<User:0x10431ed18>) on line #2 of app/views/users/index.html.erb:
+1: <% for user in @users %>
+2: 	<%= h user.username %>
+3: <% end %>
+
+    app/views/users/index.html.erb:2
+    app/views/users/index.html.erb:1:in `each'
+    app/views/users/index.html.erb:1
+    /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (86.2ms)
+Rendered rescues/_request_and_response (0.5ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing UsersController#index (for ::1 at 2009-11-26 23:24:55) [GET]
+  [4;36;1mUser Load (1.1ms)[0m   [0;1mSELECT * FROM "users" [0m
+Rendering users/index
+
+ActionView::TemplateError (undefined method `username' for #<User:0x104482628>) on line #2 of app/views/users/index.html.erb:
+1: <% for user in @users %>
+2: 	<%= h user.username %>
+3: <% end %>
+
+    app/views/users/index.html.erb:2
+    app/views/users/index.html.erb:1:in `each'
+    app/views/users/index.html.erb:1
+    /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (84.8ms)
+Rendered rescues/_request_and_response (0.9ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing UsersController#index (for ::1 at 2009-11-26 23:26:41) [GET]
+  [4;35;1mUser Load (11.5ms)[0m   [0mSELECT * FROM "users" [0m
+Rendering users/index
+Completed in 38ms (View: 20, DB: 12) | 200 OK [http://localhost/]
+
+
+Processing UsersController#index (for ::1 at 2009-11-26 23:26:45) [GET]
+  [4;36;1mUser Load (1.1ms)[0m   [0;1mSELECT * FROM "users" [0m
+Rendering users/index
+Completed in 147ms (View: 138, DB: 1) | 200 OK [http://localhost/]

@@ -5,8 +5,9 @@ class IncomingMailHandler < ActionMailer::Base
   ##
   # Receives email(s) from MMS-Email or regular email and 
   # uploads that content the user's photos.
-  # TODO: Use beanstalkd for background queueing and processing.
-  # TODO: Remember to get SpamAssasin
+  # TODO Use beanstalkd for background queueing and processing.
+  # TODO Remember to get SpamAssasin
+  # TODO Maybe see if thoughtbot's paperclip could provide something a little cleaner
   def receive(email)    
     begin
       mms = MMS2R::Media.new(email)

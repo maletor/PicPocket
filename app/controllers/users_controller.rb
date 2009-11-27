@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   include AuthenticatedSystem
   
   def index
-    
+    @users = User.find(:all)
   end
 
   # render new.rhtml
