@@ -1,3 +1,4 @@
+<%- title 'Listing Users' %>
 <% for user in @users %>
-	<%= h user.login %>
+	<%= link_to ((h user.login), user) %>
 <% end %>

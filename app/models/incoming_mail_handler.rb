@@ -23,28 +23,32 @@ class IncomingMailHandler < ActionMailer::Base
         mms.media.each do |key, files|
           if key.include?('image')
             files.each do |path|
+              mimetype = key
               
-              file = File.new(path)
+              photo = Photo.new(:uploaded_data => ActionController::TestUploadedFile.new(path, mimetype))
+              photo.save
+              user.photos << photo 
               
-              mime_type = key
-              
-              def file.local_path
-                self.path
-              end
-
-              def file.original_filename
-                File.basename(self.path)
-              end
-
-              def file.size
-                File.size(self.path)
-              end
-            
-              class << file
-                self
-              end.send(:define_method, :content_type) { mime_type }
-              
-              user.photos << Photo.create(:uploaded_data => file)
+              # file = File.new(path)
+              #               
+              #               
+              # def file.local_path
+              #   self.path
+              # end
+              # 
+              # def file.original_filename
+              #   File.basename(self.path)
+              # end
+              # 
+              # def file.size
+              #   File.size(self.path)
+              # end
+              # 
+              # class << file
+              #   self
+              # end.send(:define_method, :content_type) { mime_type }
+              #               
+              # user.photos << Photo.create(:uploaded_data => file)
               
             end
           end
