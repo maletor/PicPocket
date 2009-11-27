@@ -19,22 +19,28 @@ class IncomingMailHandler < ActionMailer::Base
       user = User.find_by_email(mms.from)
 
       if user
-        mms.media.each do |key, value|
+        mms.media.each do |key, files|
           if key.include?('image')
-            for file in value
-              file = File.new(file)
+            files.each do |file|
+              mime_type = key 
               
-              file.local_path = file.path
-              file.original_filename = File.basename(file.path)
-              file.size = File.size(file.path)
-              mime_type = key
-              
+              def file.local_path
+                self.path
+              end
+
+              def file.original_filename
+                File.basename(self.path)
+              end
+
+              def file.size
+                File.size(self.path)
+              end
+            
               class << file
-                      self
+                self
               end.send(:define_method, :content_type) { mime_type }
-                    
-              user.photos << Photo.create(:uploaded_data => file)
               
+              user.photos << Photo.create(:uploaded_data => file)
               
             end
           end
