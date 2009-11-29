@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   
-  has_many :photos, :as => :attachable
+  has_many :photos
   
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation, :reset_code
@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   # login can be either username or email address
   def self.authenticate(login, pass)
     user = find_by_username(login) || find_by_email(login)
-    return user if user && user.matching_password?(pass)
+    return user if user && user.matching_password?(pass) && user.active?
   end
   
   def matching_password?(pass)
