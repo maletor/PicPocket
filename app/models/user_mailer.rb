@@ -32,11 +32,11 @@ class UserMailer < ActionMailer::Base
       mms = MMS2R::Media.new(email)
       
       if user = User.find_by_email(mms.from)
-        if mms.default_media.content_type.includes?('image')
+        if mms.default_media.content_type.include?('image')
           user.photos << Photo.create!(:uploaded_data => mms.default_media) 
         ##
         # Video model does not yet exist
-        # elsif mms.default_media.content_type.includes?('video')
+        # elsif mms.default_media.content_type.include?('video')
          # user.videos << Video.create!(:uploaded_data => mms.default_media)
         else
           ##
