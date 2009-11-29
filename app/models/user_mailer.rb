@@ -21,16 +21,6 @@ class UserMailer < ActionMailer::Base
     @subject    += 'Link to reset your password'
     @body[:url]  = "beta.spounce.com/reset/#{user.reset_code}"
   end
-  
-  protected
-  
-  def setup_email(user)
-    @recipients  = "#{user.email}"
-    @from        = "no-reply@spounce.com"
-    @subject     = "Spounce | "
-    @sent_on     = Time.now
-    @body[:user] = user
-  end
 
   ##
   # Receives email (only one) from MMS-Email or regular email and 
@@ -66,4 +56,15 @@ class UserMailer < ActionMailer::Base
     end
         
   end
+  
+  protected
+  
+  def setup_email(user)
+    @recipients  = "#{user.email}"
+    @from        = "no-reply@spounce.com"
+    @subject     = "Spounce | "
+    @sent_on     = Time.now
+    @body[:user] = user
+  end
+  
 end
