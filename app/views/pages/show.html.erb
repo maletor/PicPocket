@@ -2,10 +2,10 @@
 
 <%= textilize @page.content %>
 
-<% # still needs to be implemented if current_user.admin? %>
+<% # if current_user.admin? %>
 <p>
 	<%= link_to "Edit", edit_page_path(@page) %> |
 	<%= link_to "Destroy", @page, :confirm => 'Are you sure?', :method => :delete %> |
 	<%= link_to "View All", pages_path %>
 </p>
-<% end %>
+<% # end %>
