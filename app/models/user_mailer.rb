@@ -21,6 +21,15 @@ class UserMailer < ActionMailer::Base
     @subject    += 'Link to reset your password'
     @body[:url]  = "beta.spounce.com/reset/#{user.reset_code}"
   end
+  
+  def invitation(invitation, signup_url)
+    subject = 'Spounce | An invitation'
+    recipients = invitation.recipient_email
+    from = 'noreply@spouncemail.com'
+    body[:invitation] = invitation
+    body[:signup_url] = signup_url
+    invitation.update_attribute(:sent_at, Time.now)
+  end
 
   ##
   # Receives email (only one) from MMS-Email or regular email and 

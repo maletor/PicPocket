@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+#  before_filter :login_required, :except => [:index, :show]
+  
   def index
     @users = User.find(:all)
   end
@@ -8,7 +10,8 @@ class UsersController < ApplicationController
   end
   
   def new
-    @user = User.new
+    @user = User.new(:invitation_token => params[:invitation_token])
+    @user.email = @user.invitation.recipient_email if @user.invitation
   end
   
   def create
@@ -23,7 +26,7 @@ class UsersController < ApplicationController
   
   def activate
     current_user = params[:activation_code].blank? ? false : User.find_by_activation_code(params[:activation_code])
-    if logged_in? && !current_user.active?
+    if current_user && !current_user.active?
       current_user.activate
       flash[:notice] = "Signup complete!"
     end
@@ -45,6 +48,7 @@ class UsersController < ApplicationController
   end
   
   def forgot
+    
     if request.post?
       user = User.find_by_email(params[:user][:email])
       
@@ -59,6 +63,7 @@ class UsersController < ApplicationController
         end
       
     end
+    
   end
   
 end

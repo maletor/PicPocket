@@ -9,12 +9,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091127095615) do
+ActiveRecord::Schema.define(:version => 20091130195432) do
 
   create_table "ads", :force => true do |t|
     t.string   "sponsor"
     t.string   "product_name"
     t.time     "video_length"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assets", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  create_table "invitations", :force => true do |t|
+    t.integer  "sender_id"
+    t.string   "recipient_email"
+    t.string   "token"
+    t.datetime "sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -33,17 +54,18 @@ ActiveRecord::Schema.define(:version => 20091127095615) do
     t.integer  "height"
     t.integer  "width"
     t.integer  "parent_id"
-    t.integer  "attachable_id"
     t.integer  "position"
     t.string   "content_type"
     t.string   "filename"
     t.string   "thumbnail"
-    t.string   "attachable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "data_updated_at"
   end
 
-  add_index "photos", ["attachable_id", "attachable_type"], :name => "index_photos_on_attachable_id_and_attachable_type"
   add_index "photos", ["parent_id"], :name => "index_photos_on_parent_id"
 
   create_table "users", :force => true do |t|
@@ -56,6 +78,8 @@ ActiveRecord::Schema.define(:version => 20091127095615) do
     t.string   "reset_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "invitation_id"
+    t.integer  "invitation_limit"
   end
 
 end

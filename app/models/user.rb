@@ -1,48 +1,99 @@
 class User < ActiveRecord::Base
+
+  has_many :assets, :dependent => :destroy
+
+  validates_associated :assets
   
-  has_many :photos
-  
+  after_update :save_assets
+
+  def new_asset_attributes=(asset_attributes) 
+    asset_attributes.each do |attributes| 
+      assets.build(attributes) 
+    end 
+  end
+
+  def existing_asset_attributes=(asset_attributes) 
+    assets.reject(&:new_record?).each do |asset| 
+      attributes = asset_attributes[asset.id.to_s] 
+      if attributes 
+        asset.attributes = attributes 
+      else 
+        asset.delete(asset) 
+      end 
+    end 
+  end 
+
+  def save_assets 
+    assets.each do |asset| 
+      asset.save(false) 
+    end 
+  end 
+
+
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation, :reset_code
-  
+
   attr_accessor :password
   before_save :prepare_password
   before_create :make_activation_code 
-  
+
   validates_presence_of :username
   validates_uniqueness_of :username, :email, :allow_blank => true
   validates_format_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
-  validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
+  validate :valid_email?
   validates_presence_of :password, :on => :create
   validates_confirmation_of :password
   validates_length_of :password, :minimum => 4, :allow_blank => true
-  
-  
+
+  validates_presence_of :invitation_id, :message => 'is required'
+  validates_uniqueness_of :invitation_id
+
+  has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
+  belongs_to :invitation
+
+  before_create :set_invitation_limit
+
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token
+
+  def valid_email?
+    TMail::Address.parse(self.email)
+  rescue
+    errors.add_to_base("Must be a valid email")
+  end
+
+  def invitation_token
+    invitation.token if invitation
+  end
+
+  def invitation_token=(token)
+    self.invitation = Invitation.find_by_token(token)
+  end
+
   # login can be either username or email address
   def self.authenticate(login, pass)
     user = find_by_username(login) || find_by_email(login)
     return user if user && user.matching_password?(pass) && user.active?
   end
-  
+
   def matching_password?(pass)
     self.password_hash == encrypt_password(pass)
   end
-  
+
   def activate
     @activated = true
     self.activated_at = Time.now.utc
     self.activation_code = nil
     save(false)
   end
-  
+
   def recently_activated?
     @activated
   end
-  
+
   def recently_reset?
     @reset
   end
-  
+
   #reset methods
   def create_reset_code
     @reset = true
@@ -54,27 +105,31 @@ class User < ActiveRecord::Base
     self.attributes = {:reset_code => nil}
     save(false)
   end
-  
+
   def active?
-    # the existence of an activation code means they have not activated yet
+    # the nil of an activation code means they have activated
     activation_code.nil?
   end
-  
+
   private
-  
+
   def prepare_password
     unless password.blank?
       self.password_salt = Digest::SHA1.hexdigest([Time.now, rand].join)
       self.password_hash = encrypt_password(password)
     end
   end
-  
+
   def encrypt_password(pass)
     Digest::SHA1.hexdigest([pass, password_salt].join)
   end
-  
+
   def make_activation_code
     self.activation_code = Digest::SHA1.hexdigest([Time.now, rand].join)
   end
-  
+
+  def set_invitation_limit
+    self.invitation_limit = 8
+  end
+
 end

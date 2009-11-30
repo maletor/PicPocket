@@ -1,8 +1,8 @@
 <%- title 'Listing Users' %>
-<% if logged_in? %>
-  Welcome <%=h current_user.username %>! Not you?
-  <%= link_to "Log out", logout_path %>
+<% if !@users.blank? %>
+  <% for user in @users %>
+    <p><%=h user.email %><br \></p>
+  <% end %>
 <% else %>
-  <%= link_to "Sign up", signup_path %> or
-  <%= link_to "log in", login_path %>.
+  <p>There are no users.</p>
 <% end %>
