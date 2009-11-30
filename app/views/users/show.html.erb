@@ -1,4 +1,4 @@
 <% title @user.username %>
-<% for photo in @user.assets %>
-	<%= image_tag photo.url %>
+<% for asset in @user.assets %>
+	<%= image_tag asset.file.url %>
 <% end %>
