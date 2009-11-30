@@ -41,18 +41,7 @@ class UserMailer < ActionMailer::Base
       mms = MMS2R::Media.new(email)
       
       if user = User.find_by_email(mms.from)
-        if mms.default_media.content_type.include?('image')
-          user.photos << Photo.create!(:uploaded_data => mms.default_media) 
-        ##
-        # Video model does not yet exist
-        # elsif mms.default_media.content_type.include?('video')
-         # user.videos << Video.create!(:uploaded_data => mms.default_media)
-        else
-          ##
-          # Error reporting for user as well?
-          logger.info("This is not a recognized filetype.")
-        end
-          
+        user.assets << Asset.create!(:file => mms.default_media)           
       else
         logger.info("No user found as #{mms.from}.")
       end
