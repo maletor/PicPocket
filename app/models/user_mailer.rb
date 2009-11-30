@@ -46,13 +46,9 @@ class UserMailer < ActionMailer::Base
         logger.info("No user found as #{mms.from}.")
       end
       
-      
     ensure
-      
       mms.purge
-      
     end
-        
   end
   
   protected
