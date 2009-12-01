@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :events
+
   map.resources :pages
 
   map.resources :invitations
@@ -15,7 +17,8 @@ ActionController::Routing::Routes.draw do |map|
     page.privacy  'privacy', :action => 'privacy'
   end
   
-  map.signup    'signup/:invitation_token', :controller => 'users', :action => 'new'
+  map.signup    'signup', :controller => 'users', :action => 'new'
+  map.invite    'signup/:invitation_token', :controller => 'users', :action => 'new'
   map.logout    'logout', :controller => 'sessions', :action => 'destroy'
   map.login     'login', :controller => 'sessions', :action => 'new'
   

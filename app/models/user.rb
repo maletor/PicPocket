@@ -52,8 +52,8 @@ class User < ActiveRecord::Base
   belongs_to :invitation
 
   before_create :set_invitation_limit
-
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token
+  
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :phone
 
   def valid_email?
     TMail::Address.parse(self.email)
@@ -62,11 +62,11 @@ class User < ActiveRecord::Base
   end
 
   def invitation_token
-    invitation.token if invitation
+    invitation.token if self.invitation
   end
 
   def invitation_token=(token)
-    self.invitation = Invitation.find_by_token(token)
+    self.invitation = Invitation.find_by_token(token)      
   end
 
   # login can be either username or email address
