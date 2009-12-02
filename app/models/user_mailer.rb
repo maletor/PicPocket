@@ -48,6 +48,7 @@ class UserMailer < ActionMailer::Base
         else
           logger.info("Media type not supported")
           # deliver_bad_content_type(mms)
+        end
       else
         logger.info("No user found as #{mms.from}.")
       end
