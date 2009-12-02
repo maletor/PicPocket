@@ -17,12 +17,45 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash[:notice] = "Thanks for signing up! Please check your email to activate your account."
-      redirect_to root_url
+      if params[:user][:avatar].blank?
+        flash[:notice] = "Thanks for signing up! Please check your email to activate your account."
+        redirect_to root_url
+      else
+        render :action => 'crop'
+      end
     else
       render :action => 'new'
     end
   end
+
+  def edit    
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      if params[:user][:avatar].blank?
+        flash[:notice] = "Successfully updated user."
+        redirect_to @user
+      else
+        render :action => "crop"
+      end
+    else
+      render :action => 'edit'
+    end
+  end
+  
+  def destroy    
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = "Successfully destroyed user."
+    redirect_to users_url
+  end
+  
+  ## 
+  # Make these following methods RESTFUL (i.e. put them in their own controllers)
+  # Also, do we really need UserObserver to send the emails? 
 
   ##
   # Why does 'if current_user' work and not 'if logged_in?' ?

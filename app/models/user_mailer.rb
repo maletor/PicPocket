@@ -32,16 +32,22 @@ class UserMailer < ActionMailer::Base
   end
 
   ##
-  # Receives email (only one) from MMS-Email or regular email and 
-  # uploads that content to the user's photos.
-  # TODO Use background queueing and processing.
-  # TODO Remember to get SpamAssasin for production
+  # Receives email from MMS-Email or regular email using MMS2R library and 
+  # uploads that *actual* content (not advertisments) to user's profile.
+  # TODO Use background queueing and processing (i.e. converting .flv to .avi)
+  # TODO Remember to get SpamAssasin for server's production
   def receive(email)    
     begin
       mms = MMS2R::Media.new(email)
       
       if user = User.find_by_email(mms.from)
-        user.assets << Asset.create!(:file => mms.default_media)           
+        if mms.default_media.content_type.include?('image')
+          user.photos << Photo.create!(:file => mms.default_media)
+        elsif mms.default_media.content_type.include?('video')        
+          user.videos << Video.create!(:file => mms.default_media)
+        else
+          logger.info("Media type not supported")
+          # deliver_bad_content_type(mms)
       else
         logger.info("No user found as #{mms.from}.")
       end

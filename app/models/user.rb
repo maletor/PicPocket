@@ -1,10 +1,46 @@
 class User < ActiveRecord::Base
-
+  
+  ##
+  # Callbacks
+  
+  after_update :reprocess_avatar, :if => :cropping?
+  after_update :save_assets
+  before_save :prepare_password
+  before_create :make_activation_code
+  before_create :set_invitation_limit
+  
+  ##
+  # Associations
+  
   has_many :assets, :dependent => :destroy
+  has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
+  has_attached_file :avatar, :styles => { :small => "100x100#", :large => "500x500>" }, :processors => [:cropper]
+  belongs_to :invitation
+  
+  ## 
+  # Scopes
+  
+  ## 
+  # Finders
+  
+  ## 
+  # Validations
+  
+  validates_presence_of :username
+  validates_uniqueness_of :username, :email, :allow_blank => true
+  validates_format_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
+  validate :valid_email?
+  validates_presence_of :password, :on => :create
+  validates_confirmation_of :password
+  validates_length_of :password, :minimum => 4, :allow_blank => true
+  
+  validates_presence_of :invitation_id, :message => 'is required.'
+  validates_uniqueness_of :invitation_id
 
   validates_associated :assets
-  
-  after_update :save_assets
+
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :password
+  attr_accessible :username, :email, :password, :password_confirmation, :reset_code, :invitation_token, :phone  
 
   def new_asset_attributes=(asset_attributes) 
     asset_attributes.each do |attributes| 
@@ -28,33 +64,16 @@ class User < ActiveRecord::Base
       asset.save(false) 
     end 
   end 
-
-
-  # new columns need to be added here to be writable through mass assignment
-  attr_accessible :username, :email, :password, :password_confirmation, :reset_code
-
-  attr_accessor :password
-  before_save :prepare_password
-  before_create :make_activation_code 
-
-  validates_presence_of :username
-  validates_uniqueness_of :username, :email, :allow_blank => true
-  validates_format_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
-  validate :valid_email?
-  validates_presence_of :password, :on => :create
-  validates_confirmation_of :password
-  validates_length_of :password, :minimum => 4, :allow_blank => true
-
-  validates_presence_of :invitation_id, :message => 'is required'
-  validates_uniqueness_of :invitation_id
-
-  has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
-  belongs_to :invitation
-
-  before_create :set_invitation_limit
   
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :phone
+  def cropping?
+    !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+  end
 
+  def avatar_geometry(style = :original)
+    @geometry ||= {}
+    @geometry[style] ||= Paperclip::Geometry.from_file(avatar.path(style))
+  end
+  
   def valid_email?
     TMail::Address.parse(self.email)
   rescue
@@ -69,7 +88,8 @@ class User < ActiveRecord::Base
     self.invitation = Invitation.find_by_token(token)      
   end
 
-  # login can be either username or email address
+  ##
+  # Login can be either username or email address
   def self.authenticate(login, pass)
     user = find_by_username(login) || find_by_email(login)
     return user if user && user.matching_password?(pass) && user.active?
@@ -94,7 +114,6 @@ class User < ActiveRecord::Base
     @reset
   end
 
-  #reset methods
   def create_reset_code
     @reset = true
     self.attributes = {:reset_code => Digest::SHA1.hexdigest([Time.now, rand].join)}
@@ -107,11 +126,15 @@ class User < ActiveRecord::Base
   end
 
   def active?
-    # the nil of an activation code means they have activated
+    # The nil of an activation code means they have activated
     activation_code.nil?
   end
 
   private
+  
+  def reprocess_avatar
+    avatar.reprocess!
+  end
 
   def prepare_password
     unless password.blank?

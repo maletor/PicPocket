@@ -1,9 +1,16 @@
-<% form_for(:user, 
-			:url => user_path(@user), 
-			:html => { :multipart => true }) do |f| %>
-        <%= error_messages_for 'user' %>
-        
-        <p>
-            <%= f.submit "Save Changes", :id => 'user_submit' %>
-        </p>
-    <% end -%>
+<% title "Edit User" %>
+ 
+<% form_for @user do |f| %>
+  <%= f.error_messages %>
+	<p>
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar %>
+  </p>
+  <p><%= f.submit "Sign up" %></p>
+<% end %>
+
+ 
+<p>
+  <%= link_to "Show", @user %> |
+  <%= link_to "View All", users_path %>
+</p>
