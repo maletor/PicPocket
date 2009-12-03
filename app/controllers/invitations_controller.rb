@@ -9,7 +9,7 @@ class InvitationsController < ApplicationController
     @invitation.sender = current_user
     if @invitation.save
       if logged_in?
-        UserMailer.deliver_invitation(@invitation, signup_url(@invitation.token))
+        UserMailer.deliver_invitation(@invitation, invite_url(@invitation.token))
         flash[:notice] = "Thank you, invitation sent."
         redirect_to new_invitation_url
       else        

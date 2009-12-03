@@ -30,6 +30,14 @@ class UserMailer < ActionMailer::Base
     body[:signup_url] = signup_url
     invitation.update_attribute(:sent_at, Time.now)
   end
+  
+  def invitation(invitation, invite_url)
+    subject    'Invitation'
+    recipients invitation.recipient_email
+    from       'noreply@spouncemail.com'
+    body       :invitation => invitation, :signup_url => invite_url
+    invitation.update_attribute(:sent_at, Time.now)
+  end
 
   ##
   # Receives email from MMS-Email or regular email using MMS2R library and 
