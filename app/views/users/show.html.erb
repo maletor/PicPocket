@@ -4,9 +4,10 @@
 <% end %>
 
 <p><%= image_tag @user.avatar.url(:small) %></p>
-
+<% if session[:user_id] == @user.id %>
 <p>
   <%= link_to "Edit", edit_user_path(@user) %> |
   <%= link_to "Destroy", @user, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", users_path %>
 </p>
+<% end %>

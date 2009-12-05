@@ -8,17 +8,49 @@
   </head>
   <body>
     <div id="container">
-      <%- flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <%- end -%>
-      
-      <%= render :partial => 'users/user_bar' %>
-      
-      <%- if show_title? -%>
-        <h1><%=h yield(:title) %></h1>
-      <%- end -%>
-      
-      <%= yield %>
+    	<div id="header">
+			<div id="banner">
+				<%= image_tag 'picpocket_text.png' %>
+			</div>
+			<% if logged_in? %>
+				<div class="nav">
+					<ul>
+						<li><%= link_to "Home", :controller => "pages" %></li>
+						<li><%= link_to "Images" %></li>
+						<li><%= link_to "Users", :controller => "users" %></li>
+						<li><%= link_to "Upload" %></li>
+					</ul>
+				</div>
+			<% end %>
+			<%= render :partial => 'users/user_bar' %>
+		<div class="clear"></div>
+		</div>
+		<div id="content">
+			<div id="left">
+				<%- flash.each do |name, msg| -%>
+				<%= content_tag :div, msg, :id => "flash_#{name}" %>
+				<%- end -%>
+				
+				
+				
+				<%- if show_title? -%>
+					
+				<h1><%=h yield(:title) %></h1>
+				<%- end -%>
+				
+				<%= yield %>
+			</div>
+			<% if logged_in? %>
+				<div id="right"><%= render :partial => "layouts/right" %></div>
+			<% end %>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+    </div>
+    <div id="footer">
+    	<span style="float:left;"><small>about | faq | blog | podcast | privacy policy | advertising info | contact us | feedback always welcome</small></span>
+    	<span style="float:right;"><small>© 2009 PicPocket</small></span>
+    	<div class="clear"></div>
     </div>
   </body>
 </html>

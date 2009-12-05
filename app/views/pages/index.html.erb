@@ -1,11 +1,23 @@
-<% title 'Spounce' %>
+<% if !logged_in? %>
+	<p>We are currently in private beta. Please submit your email address below, and we will notify you when we are ready to accept more users.</p>
+	
+	<% form_for Invitation.new do |f| %>
+	  <p>
+	    <%= f.label :recipient_email, "Your Email:" %>
+	    <%= f.text_field :recipient_email %>
+	    <%= f.submit 'Submit' %>
+	  </p>
+	<% end %>
+<% else %>
 
-<p>We are currently in private beta. Please submit your email address below, and we will notify you when we are ready to accept more users.</p>
-
-<% form_for Invitation.new do |f| %>
-  <p>
-    <%= f.label :recipient_email, "Your Email:" %>
-    <%= f.text_field :recipient_email %>
-    <%= f.submit 'Submit' %>
-  </p>
+	<span class="picpocket_info">
+		<strong>What is PicPocket?</strong>
+		PicPocket is a social-networking site that aggregates any/all picture taking at live events and makes them available on each and every events’ very own micro-site.
+	</span>
+	<br />
+	<span class="picpocket_info">
+		<center>PicPocket gives people a reason to upload and share their pictures.</center>
+		<%= image_tag "image_enhance_example.png" %>
+	</span>
+		
 <% end %>

@@ -1,5 +1,6 @@
 body {
-  background-color: #4B7399;
+  padding: 0;
+  background-color: #0089ba;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px;
 }
@@ -18,18 +19,146 @@ a {
   overflow: hidden;
 }
 
+#banner {
+	float: left;
+	width: 360px;
+	height: 80px;
+}
+
+#header {
+
+}
+#left {
+	float: left;
+	width: 735px;
+}
+#right {
+	float: right;
+	width: 220px;
+}
+.nav {
+	float: left;
+	margin-top: 27px;
+}
+ul {
+	margin: 0;
+	padding: 0;
+}
+.nav ul {
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: disc;
+	margin: 0;
+}
+
+.nav li {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#777777 none repeat scroll 0 0;
+	display:block;
+	float:left;
+	margin-right:7px;
+	padding: 5px;
+}
+.nav li:hover {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:black none repeat scroll 0 0;
+	display:block;
+	float:left;
+	margin-right:7px;
+	padding: 5px;
+}
+
+.nav li a {
+	color: white;
+	text-decoration: none;
+}
+.nav li a:hover {
+	background: black;
+	text-decoration: none;
+}
+
+#login_button {
+	width: 150px;
+}
+
+#footer {
+	width: 60%;
+	padding: 5px 40px;
+	border: solid 1px black;
+	margin: 20px auto 0 auto;
+	background-color: #fff;
+}
+
+#search_form {
+	padding: 5px;
+	border: 1px solid #ccc;
+	margin-bottom: 5px;
+	-moz-border-radius-bottomleft: 3px;
+	-moz-border-radius-bottomright: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+}
+
+#search_form input {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#FFFFFF url(http://sstatic.net/so/Img/search.png) no-repeat scroll left center;
+	border: solid 0px;
+	margin:0;
+	width:190px;
+	padding-left:16px
+}
+
+.picpocket_info {
+	float: left;
+	padding: 10px;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	border: 1px solid #ccc;
+	margin-bottom: 15px;
+}
+
+#login_box {
+	width: 375px;
+	padding: 15px;
+	margin: 0 auto;
+	background-color: #ccc;
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+}
+
 #container {
-  width: 75%;
+  width: 60%;
   margin: 0 auto;
   background-color: #FFF;
   padding: 20px 40px;
   border: solid 1px black;
-  margin-top: 20px;
 }
 
 #flash_notice, #flash_error {
   padding: 5px 8px;
-  margin: 10px 0;
+  margin: 0 0 5px 0;
 }
 
 #flash_notice {

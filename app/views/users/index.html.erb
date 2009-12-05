@@ -1,7 +1,7 @@
 <%- title 'Listing Users' %>
 <% if !@users.blank? %>
   <% for user in @users %>
-    <p><%=h user.email %><br \></p>
+    <p><%= link_to user.email, {:action => :show, :id => user.id} %><br \></p>
   <% end %>
 <% else %>
   <p>There are no users.</p>

@@ -1,13 +1,17 @@
-<% title "Log in" %>
 
-<% form_tag sessions_path do %>
-  <p>
-    <%= label_tag :login, "Username or Email Address" %><br />
-    <%= text_field_tag :login, params[:login] %>
-  </p>
-  <p>
-    <%= label_tag :password %><br />
-    <%= password_field_tag :password %>
-  </p>
-  <p><%= submit_tag "Log in" %> | <%= link_to "Forgot password?", forgot_path %></p>
-<% end %>
+<div id="login_box">
+	<% form_tag sessions_path do %>
+	<table>
+	 	<tr>
+	    	<td><%= label_tag :login, "Username/Email Address" %> :</td>
+	    	<td><%= text_field_tag :login, params[:login] %></td>
+		</tr>
+		<tr>
+	    	<td><%= label_tag :password %> :</td>
+	    	<td><%= password_field_tag :password %></td>
+		</tr>
+	</table>
+	<center><%= submit_tag "Log in", :id => "login_button" %> | <%= link_to "Forgot password?", forgot_path %></center>
+	
+	<% end %>
+</div>
