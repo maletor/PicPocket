@@ -12,7 +12,7 @@
 			<div id="banner">
 				<%= image_tag 'picpocket_text.png' %>
 			</div>
-			<% if logged_in? %>
+			<% if signed_in? %>
 				<div class="nav">
 					<ul>
 						<li><%= link_to "Home", :controller => "pages" %></li>
@@ -40,7 +40,7 @@
 				
 				<%= yield %>
 			</div>
-			<% if logged_in? %>
+			<% if signed_in? %>
 				<div id="right"><%= render :partial => "layouts/right" %></div>
 			<% end %>
 			<div class="clear"></div>

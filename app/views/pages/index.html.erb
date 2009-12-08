@@ -1,4 +1,4 @@
-<% if !logged_in? %>
+<% if !signed_in? %>
 	<p>We are currently in private beta. Please submit your email address below, and we will notify you when we are ready to accept more users.</p>
 	
 	<% form_for Invitation.new do |f| %>

@@ -1,12 +1,8 @@
 <% title "Edit User" %>
  
-<% form_for @user do |f| %>
-  <%= f.error_messages %>
-	<p>
-    <%= f.label :avatar %><br />
-    <%= f.file_field :avatar %>
-  </p>
-  <p><%= f.submit "Sign up" %></p>
+<% form_for @user, :html => { :multipart => true } do |form| %>
+  <%= form.file_field :avatar %>
+  <%= form.submit 'Save Changes', :disable_with => 'Please wait...' %>
 <% end %>
 
  

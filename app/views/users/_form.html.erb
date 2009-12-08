@@ -1,2 +1,33 @@
-<%= "<li id=\"photo_#{photo.id}\">#{photo.filename} %>
-    <%= link_to_remote "Remove", :url  => photo_path(:id => photo), :method => :delete, :html => { :title  => "Remove this photo" } %></li>
+<%= form.error_messages %>
+<div class="username_field">
+  <%= form.label :username %>
+  <%= form.text_field :username %>
+</div>
+<div class="address_field">
+  <%= form.label :address %>
+  <%= form.text_field :address %>
+</div>
+<div class="phone_field">
+  <%= form.label :phone %>
+  <%= form.text_field :phone %>
+</div>
+<div class="text_field">
+  <%= form.label :email %>
+  <%= form.text_field :email %>
+</div>
+<div class="password_field">
+  <%= form.label :password %>
+  <%= form.password_field :password %>
+</div>
+<div class="password_field">
+  <%= form.label :password_confirmation, "Confirm password" %>
+  <%= form.password_field :password_confirmation %>
+</div>
+<div class="invitation_token_field">
+  <%= form.label :invitation_token %>
+  <%= form.text_field :invitation_token %>
+</div>
+<div class="avatar_field">
+  <%= form.label :avatar %>
+  <%= form.file_field :avatar %>
+</div>

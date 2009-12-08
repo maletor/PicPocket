@@ -4,4 +4,4 @@ ActionMailer::Base.sendmail_settings = {
   :arguments => '-i -t'
 }
 
-ActionMailer::Base.default_url_options[:host] = "spounce.com"
+ActionMailer::Base.default_url_options[:host] = HOST

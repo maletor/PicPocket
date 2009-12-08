@@ -1,31 +1,19 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :events
+  map.resources :invitations, :only => [:new, :create]
+  map.resources :users do |user|
+    user.resource :photo
+    user.resource :video
+    user.resource :event
+  end
+  
 
-  map.resources :pages
-
-  map.resources :invitations
-
-  map.resources :sessions
-
-  map.resources :users
-
-  map.resources :ads
-    
   map.with_options :controller => 'pages' do |page|
     page.about    'about', :action => 'about'
     page.contact  'contact', :action => 'contact'
     page.privacy  'privacy', :action => 'privacy'
   end
   
-  map.signup    'signup', :controller => 'users', :action => 'new'
-  map.invite    'signup/:invitation_token', :controller => 'users', :action => 'new'
-  map.logout    'logout', :controller => 'sessions', :action => 'destroy'
-  map.login     'login', :controller => 'sessions', :action => 'new'
-  
-  map.activate  'activate/:activation_code', :controller => 'users', :action => 'activate'
-  map.forgot    'forgot', :controller => 'users', :action => 'forgot'
-  map.reset     'reset/:reset_code', :controller => 'users', :action => 'reset'
-        
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

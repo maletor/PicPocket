@@ -1,40 +1,9 @@
 
 <div id="login_box">
-	<span><strong>Sign Up</strong></span>
-	<% form_for @user do |f| %>
-	<table>
-		<tr>
-	  		<td><%= f.error_messages %></td>
-	  	</tr>
-	  	<tr>
-			<td><%= f.label :invitation_token %></td>
-	  		<td><%= f.text_field :invitation_token %></td>
-	  	</tr>
-		<tr>
-	    	<td><%= f.label :username %></td>
-	    	<td><%= f.text_field :username %></td>
-		</tr>
-		<tr>
-			<td><%= f.label :email, "Email Address" %></td>
-			<td><%= f.text_field :email %></td>
-		</tr>
-		<tr>
-			<td><%= f.label :password %></td>
-			<td><%= f.password_field :password %></td>
-		</tr>
-		<tr>
-			<td><%= f.label :password_confirmation, "Confirm Password" %></td>
-			<td><%= f.password_field :password_confirmation %></td>
-		</tr>
-		<tr>
-			<td><%= f.label :phone %></td>
-			<td><%= f.text_field :phone %></td>
-		</tr>
-		<tr>
-	    	<td><%= f.label :avatar %></td>
-	    	<td><%= f.file_field :avatar %></td>
-		</tr>
-	</table>
-	<center><%= f.submit "Sign up" %></center>
+	<h2>Sign up</h2>
+
+	<% form_for @user, :html => { :multipart => true } do |form| %>
+	  <%= render :partial => '/users/form', :object => form %>
+	  <%= form.submit 'Sign up', :disable_with => 'Please wait...' %>
 	<% end %>
 </div>

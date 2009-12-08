@@ -9,12 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091201090031) do
+ActiveRecord::Schema.define(:version => 20091208193624) do
 
   create_table "ads", :force => true do |t|
     t.string   "sponsor"
-    t.string   "product_name"
-    t.time     "video_length"
+    t.string   "product"
+    t.string   "href"
+    t.decimal  "video_length", :precision => 8, :scale => 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "adventures", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.integer  "owner"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -25,10 +34,27 @@ ActiveRecord::Schema.define(:version => 20091201090031) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
+  end
+
+  create_table "coupons", :force => true do |t|
+    t.string   "sponsor_code"
+    t.decimal  "amount",        :precision => 8, :scale => 2
+    t.text     "description"
+    t.string   "steganography"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", :force => true do |t|
+    t.string   "title"
+    t.string   "user_id"
+    t.string   "category"
+    t.datetime "start_time"
+    t.datetime "finish_time"
+    t.string   "address"
+    t.text     "info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "invitations", :force => true do |t|
@@ -40,51 +66,52 @@ ActiveRecord::Schema.define(:version => 20091201090031) do
     t.datetime "updated_at"
   end
 
-  create_table "pages", :force => true do |t|
-    t.string   "name"
-    t.string   "permalink"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "photos", :force => true do |t|
-    t.string   "title"
-    t.integer  "size"
-    t.integer  "height"
-    t.integer  "width"
-    t.integer  "parent_id"
-    t.integer  "position"
-    t.string   "content_type"
-    t.string   "filename"
-    t.string   "thumbnail"
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "photo_timestamp"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "data_file_name"
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.datetime "data_updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
-
-  add_index "photos", ["parent_id"], :name => "index_photos_on_parent_id"
 
   create_table "users", :force => true do |t|
-    t.string   "username"
     t.string   "email"
-    t.string   "password_hash"
-    t.string   "password_salt"
-    t.string   "activation_code"
-    t.datetime "activated_at"
-    t.string   "reset_code"
+    t.string   "username"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "encrypted_password",  :limit => 128
+    t.string   "salt",                :limit => 128
+    t.string   "confirmation_token",  :limit => 128
+    t.string   "remember_token",      :limit => 128
+    t.boolean  "email_confirmed",                    :default => false, :null => false
+    t.boolean  "enhance",                            :default => true,  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "invitation_id"
     t.integer  "invitation_limit"
-    t.integer  "phone"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["id", "confirmation_token"], :name => "index_users_on_id_and_confirmation_token"
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+
+  create_table "videos", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "video_file_name"
+    t.string   "video_content_type"
+    t.integer  "video_file_size"
+    t.datetime "video_updated_at"
   end
 
 end

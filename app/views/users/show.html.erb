@@ -1,7 +1,4 @@
-<% title @user.username %>
-<% for asset in @user.assets %>
-	<%= image_tag asset.file.url %>
-<% end %>
+<% title @user.email %>
 
 <p><%= image_tag @user.avatar.url(:small) %></p>
 <% if session[:user_id] == @user.id %>
