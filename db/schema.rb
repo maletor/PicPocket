@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091209042822) do
+ActiveRecord::Schema.define(:version => 20091209090047) do
 
   create_table "ads", :force => true do |t|
     t.string   "sponsor"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(:version => 20091209042822) do
     t.integer  "user_id"
     t.integer  "event_id"
     t.integer  "owner"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assets", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -114,6 +122,13 @@ ActiveRecord::Schema.define(:version => 20091209042822) do
     t.string   "video_content_type"
     t.integer  "video_file_size"
     t.datetime "video_updated_at"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "photo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

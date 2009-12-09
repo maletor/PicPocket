@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ReportTest < ActiveSupport::TestCase
+class VotesControllerTest < ActionController::TestCase
   # Replace this with your real tests.
   test "the truth" do
     assert true

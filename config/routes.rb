@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :photos, :member => { :flag => :put }
   map.resources :videos
   map.resources :events
+  map.resources :votes
   
   map.invite '/sign_up/:invitation_token', :controller => 'users', :action => 'new'
   

@@ -3,4 +3,4 @@
 <%= @photo.flag_count %><br />
 <%= @photo.status %><br />
 
-<%= link_to_unless @photo.flagged?, 'Flag this', flag_photo_path(@photo), :method => :put %>
+<%= link_to 'Flag this?', votes_path(:photo_id => params[:id]), :method => :post %>

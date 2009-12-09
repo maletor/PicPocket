@@ -1,6 +1,8 @@
 class Photo < ActiveRecord::Base
   belongs_to :user
   
+  has_many :votes
+  
   named_scope :private, :conditions => {:status => 'private', :flagged => false}
   named_scope :public, :conditions => {:status => 'public', :flagged => false}
   named_scope :trashed, :conditions => {:status => 'trashed', :flagged => false}  

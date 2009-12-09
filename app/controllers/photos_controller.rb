@@ -37,10 +37,4 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
   end
   
-  def flag
-    @photo = Photo.find(params[:id])
-    @photo.flag
-    redirect_to @photo
-  end
-  
 end
