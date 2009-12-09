@@ -27,19 +27,19 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :invitation_id
   
   attr_accessible :invitation_token, :avatar, :address, :username, :phone, :email
-
+  
   def invitation_token
-    invitation.token if self.invitation
+    invitation.token if invitation
   end
 
   def invitation_token=(token)
-    self.invitation = Invitation.find_by_token(token)      
+    self.invitation = Invitation.find_by_token(token)
   end
 
   private
-  
+
   def set_invitation_limit
-    self.invitation_limit = 8
+    self.invitation_limit = 5
   end
 
 end

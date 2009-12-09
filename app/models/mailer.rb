@@ -1,15 +1,15 @@
 require 'mms2r'
 
 class Mailer < ActionMailer::Base
-  default_url_options[:host] = HOST
+  
+  default_url_options[:host] = 'beta.spounce.com'
   
   def invitation(invitation)
-    
-    from = DO_NOT_REPLY
-    recipients = invitation.recipient_email
-    subject = 'Spounce | An Invitation'
-    body[:invitation] = invitation    
-    
+    subject    'Spounce | An Invitation'
+    recipients invitation.recipient_email
+    from       'noreply@spounce.com'
+    body       :invitation => invitation
+    invitation.update_attribute(:sent_at, Time.now)
   end
   
   def receive(email) 
