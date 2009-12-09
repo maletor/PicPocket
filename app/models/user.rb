@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   before_create :set_invitation_limit
   
   has_many :photos
+  accepts_nested_attributes_for :photos
+  
   has_many :videos
   
   has_many :adventures

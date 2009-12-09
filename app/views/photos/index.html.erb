@@ -1,0 +1,15 @@
+<% title "My Photos" %>
+
+<table>
+  <tr>
+    <th>Title</th>
+  </tr>
+  <% for photo in @photos %>
+    <tr>
+      <td><%=h photo.user_id %></td>
+      <td><%= link_to "Show", photo_path(photo) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Photo", new_photo_path %></p>
