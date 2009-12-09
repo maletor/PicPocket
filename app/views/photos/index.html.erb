@@ -7,8 +7,7 @@
   <% for photo in @photos %>
     <tr>
       <td><%=h photo.user_id %></td>
-	  <td><%= image_tag photo.photo.url %></td>
-      <td><%= link_to "Show", photo_path(photo) %></td>
+      <td><%= link_to image_tag(photo.photo.url, :width => "500"), photo_path(photo) %></td>
     </tr>
   <% end %>
 </table>

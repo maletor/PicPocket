@@ -34,6 +34,10 @@ ActiveRecord::Schema.define(:version => 20091209042822) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   create_table "coupons", :force => true do |t|

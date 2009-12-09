@@ -1,7 +1,13 @@
-<% title "#{@user.username}'s private images" %>
-<p>Avatar:</p>
-<p><%= image_tag @user.avatar.url(:small) %></p>
-<p>
+
+<% title "#{@user.username}'s Private Images" %>
+<div id="user_info">
+	<table class="user_information">
+		<tr>
+			<td><%= image_tag @user.avatar.url(:small) %></td>
+			<td class="user_name"><%= @user.username %></td>
+		</tr>
+	</table>
+</div>
 	Photos:
   <% for photo in @user.photos %>
     <tr>

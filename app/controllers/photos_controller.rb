@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   def index
-    @photos = Photo.public
+    #@photos = Photo.public
+    @photos = Photo.find(:all, :conditions => {:status => "public"})
   end
   
   def show

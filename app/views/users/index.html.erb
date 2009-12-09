@@ -1,8 +1,15 @@
 <%- title 'Listing Users' %>
 <% if !@users.blank? %>
-  <% for user in @users %>
-    <p><%= link_to user.email, user_path(user) %><br \></p>
-  <% end %>
+	
+	<% for user in @users %>
+	<table class="user_information">
+		<tr>
+			<td><%= image_tag user.avatar.url(:small) %></td>
+			<td><%= link_to user.email, user_path(user) %><td>
+		</tr>
+	</table>
+	<% end %>
+
 <% else %>
   <p>There are no users.</p>
 <% end %>

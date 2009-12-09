@@ -16,9 +16,9 @@
 				<div class="nav">
 					<ul>
 						<li><%= link_to "Home", root_url %></li>
-						<li><%= link_to "Images" %></li>
+						<li><%= link_to "Images", photos_path %></li>
 						<li><%= link_to "Users", users_path %></li>
-						<li><%= link_to "Upload" %></li>
+						<li><%= link_to "Upload", new_photo_path %></li>
 					</ul>
 				</div>
 			<% end %>
@@ -33,10 +33,7 @@
 				
 				
 				
-				<%- if show_title? -%>
-					
-				<h1><%=h yield(:title) %></h1>
-				<%- end -%>
+				
 				
 				<%= yield %>
 			</div>
@@ -48,7 +45,11 @@
 		<div class="clear"></div>
     </div>
     <div id="footer">
-    	<span style="float:left;"><small>about | faq | blog | podcast | privacy policy | advertising info | contact us | feedback always welcome</small></span>
+    	<span style="float:left;"><small>
+    		<%= link_to "About", about_path %> | 
+    		<%= link_to "fag" %> |
+    		<%= link_to "blog" %> | 
+    		<%= link_to "contact us", contact_path %> | feedback always welcome</small></span>
     	<span style="float:right;"><small>© 2009 PicPocket</small></span>
     	<div class="clear"></div>
     </div>

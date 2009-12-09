@@ -1,4 +1,4 @@
-<%= image_tag @photo.photo.url %><br />
+<%= image_tag(@photo.photo.url,:width => "600") %><br />
 <%= link_to "#{@photo.created_at}", @photo.photo.url, :popup => ["height=300,width=600"] %><br />
 <%= @photo.flag_count %><br />
 <%= @photo.status %><br />
