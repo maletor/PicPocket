@@ -13,6 +13,7 @@ class InvitationsController < ApplicationController
         flash[:notice] = "Thank you, invitation sent."
         redirect_to new_invitation_url
       else        
+        Mailer.deliver_invitation(@invitation)
         flash[:notice] = "Thank you, we will notify you when we are ready."
         redirect_to root_url
       end
