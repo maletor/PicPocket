@@ -1,33 +1,36 @@
 <%= form.error_messages %>
-<div class="username_field">
-  <%= form.label :username %>
-  <%= form.text_field :username %>
-</div>
-<div class="address_field">
-  <%= form.label :address %>
-  <%= form.text_field :address %>
-</div>
-<div class="phone_field">
-  <%= form.label :phone %>
-  <%= form.text_field :phone %>
-</div>
-<div class="text_field">
-  <%= form.label :email %>
-  <%= form.text_field :email %>
-</div>
-<div class="password_field">
-  <%= form.label :password %>
-  <%= form.password_field :password %>
-</div>
-<div class="password_field">
-  <%= form.label :password_confirmation, "Confirm password" %>
-  <%= form.password_field :password_confirmation %>
-</div>
-<div class="invitation_token_field">
-  <%= form.label :invitation_token %>
-  <%= form.text_field :invitation_token %>
-</div>
-<div class="avatar_field">
-  <%= form.label :avatar %>
-  <%= form.file_field :avatar %>
-</div>
+
+<table>
+	<tr class="username_field">
+		<td><%= form.label :username %></td>
+ 		<td><%= form.text_field :username %></td>
+ 	</tr>
+	<tr class="address_field">
+ 		<td><%= form.label :address %></td>
+ 		<td><%= form.text_field :address %></td>
+ 	</tr>
+	<tr class="phone_field">
+  		<td><%= form.label :phone %></td>
+  		<td><%= form.text_field :phone %></td>
+	</tr>
+	<tr class="text_field">
+  		<td><%= form.label :email %></td>
+  		<td><%= form.text_field :email %></td>
+	</tr>
+	<tr class="password_field">
+    	<td><%= form.label :password %></td>
+  		<td><%= form.password_field :password %></td>
+	</tr>
+	<tr class="password_field">
+  		<td><%= form.label :password_confirmation, "Confirm password" %></td>
+  		<td><%= form.password_field :password_confirmation %></td>
+	</tr>
+	<tr class="invitation_token_field">
+  		<td><%= form.label :invitation_token %></td>
+ 		<td><%= form.text_field :invitation_token %></td>
+	</tr>
+	<tr class="avatar_field">
+		<td><%= form.label :avatar %></td>
+		<td><%= form.file_field :avatar %></td>
+	</tr>
+</table>

@@ -1,22 +1,23 @@
 
 <div id="login_box">
-	<h2>Sign in</h2>
-
+	
 	<% form_for :session, :url => session_path do |form| %>
-	  <div class="text_field">
-	    <%= form.label :email %>
-	    <%= form.text_field :email %>
-	  </div>
-	  <div class="text_field">
-	    <%= form.label :password %>
-	    <%= form.password_field :password %>
-	  </div>
-	  <div class="submit_field">
-	    <%= form.submit "Sign in", :disable_with => "Please wait..." %>
-	  </div>
+	<table>
+	  <tr class="text_field">
+	    <td><%= form.label :email %></td>
+	    <td><%= form.text_field :email %></td>
+	  </tr>
+	  <tr class="text_field">
+	    <td><%= form.label :password %></td>
+	    <td><%= form.password_field :password %></td>
+	  </tr>
+	  <tr class="submit_field">
+	    <td><%= form.submit "Sign in", :disable_with => "Please wait..." %></td>
+	  </tr>
+	</table>
 	<% end %>
 
-	<ul>
+	<ul style="float: right;">
 	  <li>
 	    <%= link_to "Sign up", new_user_path %>
 	  </li>
@@ -24,4 +25,5 @@
 	    <%= link_to "Forgot password?", new_password_path %>
 	  </li>
 	</ul>
+	<div class="clear"></div>
 </div>

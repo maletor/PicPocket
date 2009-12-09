@@ -1,7 +1,6 @@
 
 <div id="login_box">
-	<h2>Sign up</h2>
-
+	<%= image_tag "signup.png", :id => "sign_up_img" %>
 	<% form_for @user, :html => { :multipart => true } do |form| %>
 	  <%= render :partial => '/users/form', :object => form %>
 	  <%= form.submit 'Sign up', :disable_with => 'Please wait...' %>

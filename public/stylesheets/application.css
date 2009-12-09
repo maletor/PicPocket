@@ -1,8 +1,8 @@
 body {
   padding: 0;
   background-color: #0089ba;
-  font-family: Verdana, Helvetica, Arial;
-  font-size: 14px;
+  font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+  font-size: 12px;
 }
 
 a img {
@@ -30,7 +30,8 @@ a {
 }
 #left {
 	float: left;
-	width: 735px;
+	width: 725px;
+	margin-right: 10px;
 }
 #right {
 	float: left;
@@ -86,7 +87,7 @@ ul {
 }
 
 #footer {
-	width: 60%;
+	width: 960px;
 	padding: 5px 40px;
 	border: solid 1px black;
 	margin: 20px auto 0 auto;
@@ -96,7 +97,7 @@ ul {
 #search_form {
 	padding: 5px;
 	border: 1px solid #ccc;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 	-moz-border-radius-bottomleft: 3px;
 	-moz-border-radius-bottomright: 3px;
 	-webkit-border-bottom-left-radius: 3px;
@@ -134,7 +135,7 @@ ul {
 }
 
 #login_box {
-	width: 375px;
+	width: 425px;
 	padding: 15px;
 	margin: 0 auto;
 	background-color: #ccc;
@@ -148,8 +149,20 @@ ul {
 	-webkit-border-top-right-radius: 10px;
 }
 
+#login_box ul {
+	margin-left: 30px;
+}
+#login_box form {
+	margin: 0 auto;
+	width: 300px;
+}
+
+#sign_up_img {
+	margin-left: 60px;
+}
+
 #container {
-  width: 60%;
+  width: 960px;
   margin: 0 auto;
   background-color: #FFF;
   padding: 20px 40px;
@@ -171,17 +184,38 @@ ul {
   border: solid 1px #C66;
 }
 
+#flash_success {
+	background-color: #42ff9b;
+	padding: 3px;
+	margin: 5px 0px 5px 0px;
+	border: solid 2px #00f372;
+}
+
 .fieldWithErrors {
   display: inline;
 }
 
 #errorExplanation {
-  width: 400px;
+  width: 350px;
   border: 2px solid #CF0000;
   padding: 0px;
   padding-bottom: 12px;
-  margin-bottom: 20px;
+  margin: 5px auto;
   background-color: #f0f0f0;
+}
+
+hr {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#eae9ea none repeat scroll 0 0;
+	border: none;
+	clear:both;
+	color:#eae9ea;
+	float:none;
+	height:0.1em;
+	margin:1.45em 0 1.45em;
+	width:100%
 }
 
 #errorExplanation h2 {

@@ -34,6 +34,10 @@ ActiveRecord::Schema.define(:version => 20091208193624) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   create_table "coupons", :force => true do |t|
@@ -46,8 +50,8 @@ ActiveRecord::Schema.define(:version => 20091208193624) do
   end
 
   create_table "events", :force => true do |t|
+    t.integer  "user_id"
     t.string   "title"
-    t.string   "user_id"
     t.string   "category"
     t.datetime "start_time"
     t.datetime "finish_time"
