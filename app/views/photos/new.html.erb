@@ -1,0 +1,6 @@
+<% title 'New Photo' %>
+
+<% form_for @photo, :html => { :multipart => true } do |form| %>
+  <%= render :partial => 'form', :object => form %>
+  <%= form.submit 'Upload', :disable_with => 'Please wait...' %>
+<% end %>

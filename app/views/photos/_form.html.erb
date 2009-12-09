@@ -1,0 +1,9 @@
+  <%= form.error_messages %>
+<p>
+	
+  <%= form.label :photo %><br />
+  <%= form.file_field :photo %>
+
+  <%= form.label :status %>
+  <%= form.select :status, ["public", "private", "trash"], { :prompt => true } %>
+</p>

@@ -1,13 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :events
   map.resources :invitations, :only => [:new, :create]
-  map.resources :users do |user|
-    user.resource :photo
-    user.resource :video
-    user.resource :event
-  end
-  
+  map.resources :users
+  map.resources :photos, :member => { :flag => :put }
+  map.resources :videos
+  map.resources :events
 
+  
   map.with_options :controller => 'pages' do |page|
     page.about    'about', :action => 'about'
     page.contact  'contact', :action => 'contact'

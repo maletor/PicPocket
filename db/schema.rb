@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091208193624) do
+ActiveRecord::Schema.define(:version => 20091209032144) do
 
   create_table "ads", :force => true do |t|
     t.string   "sponsor"
@@ -34,10 +34,6 @@ ActiveRecord::Schema.define(:version => 20091208193624) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
   end
 
   create_table "coupons", :force => true do |t|
@@ -80,6 +76,9 @@ ActiveRecord::Schema.define(:version => 20091208193624) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.boolean  "flagged"
+    t.integer  "flag_count",         :default => 0
+    t.string   "status"
   end
 
   create_table "users", :force => true do |t|
