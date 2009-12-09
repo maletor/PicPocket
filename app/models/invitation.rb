@@ -5,6 +5,7 @@ class Invitation < ActiveRecord::Base
   validates_presence_of :recipient_email
   validate :recipient_is_not_registered
   validate :sender_has_invitations, :if => :sender
+  attr_accessible :recipient_email
 
   before_create :generate_token
   before_create :decrement_sender_count, :if => :sender

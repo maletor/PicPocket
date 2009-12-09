@@ -1,6 +1,7 @@
 require 'mms2r'
 
 class Mailer < ActionMailer::Base
+  default_url_options[:host] = HOST
   
   def invitation(invitation)
     

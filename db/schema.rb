@@ -28,18 +28,6 @@ ActiveRecord::Schema.define(:version => 20091209042822) do
     t.datetime "updated_at"
   end
 
-  create_table "assets", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
-  end
-
   create_table "coupons", :force => true do |t|
     t.string   "sponsor_code"
     t.decimal  "amount",        :precision => 8, :scale => 2

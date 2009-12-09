@@ -5,3 +5,4 @@ ActionMailer::Base.sendmail_settings = {
 }
 
 ActionMailer::Base.default_url_options[:host] = HOST
+
