@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   def index
-    @photos = Photo.find(:all)
+    @photos = Photo.public
   end
   
   def show

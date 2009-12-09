@@ -1,6 +1,10 @@
 class Photo < ActiveRecord::Base
   belongs_to :user
   
+  named_scope :private, :conditions => {:status => 'private', :flagged => false}
+  named_scope :public, :conditions => {:status => 'public', :flagged => false}
+  named_scope :trashed, :conditions => {:status => 'trashed', :flagged => false}  
+  
   has_attached_file :photo
   
   validates_attachment_presence :photo
@@ -12,4 +16,5 @@ class Photo < ActiveRecord::Base
     increment!(:flag_count)
     save(false)
   end
+  
 end

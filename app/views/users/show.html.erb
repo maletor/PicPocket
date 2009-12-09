@@ -1,9 +1,18 @@
-<% title @user.email %>
-
+<% title "#{@user.username}'s private images" %>
+<p>Avatar:</p>
 <p><%= image_tag @user.avatar.url(:small) %></p>
 <p>
-  <%= link_to "My Photos", user_photos_path(@user) %> |
+	Photos:
+  <% for photo in @user.photos %>
+    <tr>
+      <td><%=h photo.user_id %></td>
+	  <td><%= image_tag photo.photo.url %></td>
+      <td><%= link_to "Show", photo_path(photo) %></td>
+    </tr>
+  <% end %>
+<br />
   <%= link_to "Edit", edit_user_path(@user) %> |
   <%= link_to "Destroy", @user, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", users_path %>
+
 </p>

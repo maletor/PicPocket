@@ -19,14 +19,13 @@ class User < ActiveRecord::Base
                     :path => ":rails_root/public/assets/users/:id/:style/:basename.:extension",
                     :default_url => '/images/anonymous.png'
   
-  validates_attachment_presence :avatar
   validates_attachment_size :avatar, :less_than => 5.megabytes
   validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png']
       
   validates_presence_of :invitation_id, :message => 'is required.'
   validates_uniqueness_of :invitation_id
   
-  attr_accessible :invitation_token, :avatar
+  attr_accessible :invitation_token, :avatar, :address, :username, :phone, :email
 
   def invitation_token
     invitation.token if self.invitation
